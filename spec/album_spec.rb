@@ -1,5 +1,6 @@
 require('album')
 require('rspec')
+require('song')
 
 
 
@@ -63,6 +64,18 @@ describe('.#Album') do
       album3 = Album.new("Red Letter Day", 'Death Staves', 2001, 'Rock', nil)
       album3.save
       expect(Album.search('Red')).to(eq([@album2, album3]))
+    end
+  end
+
+  describe('#songs') do
+    it("returns an album's songs") do
+      album = Album.new("Giant Steps", 'John Coltrane','1963', 'Jazz', nil)
+      album.save()
+      song = Song.new("Naima", album.id, nil)
+      song.save()
+      song2 = Song.new("Cousin Mary", album.id, nil)
+      song2.save()
+      expect(album.songs).to(eq([song, song2]))
     end
   end
 

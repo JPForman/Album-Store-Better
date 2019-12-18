@@ -55,4 +55,8 @@ class Album
     Album.all.select { |album| album.name.match?(/(#{query})/i)}
   end
 
+  def songs
+   Song.find_by_album(self.id)
+  end
+
 end
